@@ -108,34 +108,34 @@ class _MyHomePageState extends State<MyHomePage> {
         Uri.parse('https://amberclass.fimijm.com/api/v1/recipes'));
     var responseData = jsonDecode(response.body);
     print(responseData);
-      // return (responseData['data']['recipes'] as List<Map<String,String>>).map(
-      //         (element) {
-      //           return Recipe(
-      //               element['title']!,
-      //               element['image']!,
-      //               element['description']!);
-      //
-      //     }
-      // ).toList();
+      return (responseData['data']['recipes'] as List<Map<String,String>>).map(
+              (element) {
+                return Recipe(
+                    element['title']!,
+                    element['image']!,
+                    element['description']!);
+      
+          }
+      ).toList();
     }
   }
 
-  List<Recipe> createRecipeList(List data) {
-      List<Recipe> list = [];
-      for (int i = 0; i <= data.length; i++) {
-        String title = data[i]['title'];
-        String image = data[i]['image'];
-        String description = data[i]['description'];
-        Recipe recipe = new Recipe(title:title, image:image, description:description);
-        list.add(recipe);
-      }
-      return list;
-    }
+  // List<Recipe> createRecipeList(List data) {
+  //     List<Recipe> list = [];
+  //     for (int i = 0; i <= data.length; i++) {
+  //       String title = data[i]['title'];
+  //       String image = data[i]['image'];
+  //       String description = data[i]['description'];
+  //       Recipe recipe = new Recipe(title:title, image:image, description:description);
+  //       list.add(recipe);
+  //     }
+  //     return list;
+  //   }
 
-  class Recipe{
-      final String title;
-      final String image;
-      final String description;
+  // class Recipe{
+  //     final String title;
+  //     final String image;
+  //     final String description;
 
-      Recipe({required this.title, required this.image, required this.description});
-  }
+  //     Recipe({required this.title, required this.image, required this.description});
+  // }
