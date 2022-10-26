@@ -19,12 +19,11 @@ class RecipeCard extends StatelessWidget{
       child: Card(
         child: Container(
           margin: const EdgeInsets.only(top: 5),
-          height: MediaQuery.of(context).size.width * 0.1,
+          // height: MediaQuery.of(context).size.width * 0.1,
           child: Column(
-            mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               ListTile(
-                leading: Image.asset(
+                leading: Image.network(
                     imageUrl,
                     // width: MediaQuery.of(context).size.width * 0.1,
                     // height: 300,

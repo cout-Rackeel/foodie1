@@ -15,6 +15,8 @@ class Recipe{
     Recipe("Cornbeef & Rice", "images/cornbeef.jpeg", "Coconut milk & Mackerel")
   ];
 
-  static List<Recipe> sampleRecipes2 = [];
+  static List<Recipe> sampleRecipes2 = [
+   
+  ];
 
 }

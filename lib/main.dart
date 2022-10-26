@@ -44,11 +44,12 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: SafeArea(
         child:
-        FutureBuilder<List<Recipe>>(
-          future: getAllRecipes2(),
+        FutureBuilder<void>(
+          future: getAllRecipes(),
           builder: (context, snapshot) =>
           snapshot.connectionState == ConnectionState.waiting ?
-          Center(child: const CircularProgressIndicator()) : ListView.builder(
+          Center(child: const CircularProgressIndicator()) :
+         ListView.builder(
               itemCount: Recipe.sampleRecipes2.length,
               itemBuilder: (BuildContext context, int index) {
                 return RecipeCard(
@@ -91,8 +92,19 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> getAllRecipes() async {
     var response = await http.get(
         Uri.parse('https://amberclass.fimijm.com/api/v1/recipes'));
-    var responseData = json.decode(response.body);
-    (responseData['data']['recipes'] as List<Map<String, String>>).forEach(
+    var responseData = jsonDecode(response.body);
+    var resp = responseData['data']['recipes'];
+    //  print(responseData['data']['recipes'][0]);
+    // for(int i= 0; i <= resp.length ; i++ ){
+    //   Recipe.sampleRecipes2.add(
+    //           Recipe(
+    //               resp[i]['title']!,
+    //               resp[i]['image']!,
+    //               resp[i]['description']!)
+    //       );
+    // }
+
+    resp.forEach(
             (element) {
           Recipe.sampleRecipes2.add(
               Recipe(
@@ -102,21 +114,44 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         }
     );
+
+
+
+    // (responseData['data']['recipes'] as List<Map<String, String>>).forEach(
+    //         (element) {
+    //       print(Recipe.sampleRecipes[0].label);
+    //       Recipe.sampleRecipes2.add(
+    //           Recipe(
+    //               element['title']!,
+    //               element['image']!,
+    //               element['description']!)
+    //       );
+    //     }
+    // );
   }
   Future<List<Recipe>> getAllRecipes2() async {
     var response = await http.get(
         Uri.parse('https://amberclass.fimijm.com/api/v1/recipes'));
     var responseData = jsonDecode(response.body);
-    print(responseData);
-      return (responseData['data']['recipes'] as List<Map<String,String>>).map(
+    var resp = responseData['data']['recipes'] as List<Map<String,String>>;
+      return resp.map(
               (element) {
                 return Recipe(
                     element['title']!,
                     element['image']!,
                     element['description']!);
-      
           }
       ).toList();
+
+      //   return (responseData['data']['recipes'] as List<Map<String,String>>).map(
+      //         (element) {
+      //           return Recipe(
+      //               element['title']!,
+      //               element['image']!,
+      //               element['description']!);
+      
+      //     }
+      // ).toList();
     }
   }
 
